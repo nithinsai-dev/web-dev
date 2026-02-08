@@ -8,5 +8,6 @@
   },
   "editor.inlineSuggest.enabled": false,
   "editor.suggestOnTriggerCharacters": false,
-  "github.copilot.enable": false
+  "github.copilot.enable": false,
+  "liveServer.settings.port": 5501
 }
