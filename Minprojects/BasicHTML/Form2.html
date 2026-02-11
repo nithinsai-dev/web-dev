@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>form1</title>
+    <style>
+        .refernce-container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .language-container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Application form</h1>
+    <p style="color:grey;">Thank you for showing interest.Please check below for the job oppurtuinites
+        that
+        meet your criteria and send ur application by filling out job application form.</p>
+    <table cellspacing="10">
+        <tr>
+            <td><label for="name">Full Name:</label></td>
+            <td><input type="text" id="name" placeholder="Enter your name and surname" required></td>
+        </tr>
+        <tr>
+            <td><label for="email">Email address:</label></td>
+            <td><input type="email" id="email" placeholder="Enter your email address" required></td>
+        </tr>
+        <tr>
+            <td><label for="age">Age:</label></td>
+            <td><input type="number" id="age" placeholder="Enter your age" required></td>
+        </tr>
+        <tr>
+            <td> <label for="role">Which option best describes your current Role ?</label></td>
+            <td>
+                <select id="role" name="role">
+                    <option value="student">Student</option>
+                    <option value="fulltimejob">Full Time Job</option>
+                    <option value="other">Other</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="reference" name="refernce">Would you like to list References ?</label></td>
+            <td>
+                <div class="refernce-container">
+                    <div>
+                        <input type="radio" id="yes" name="reference" value="yes">
+                        <label for="yes">Yes</label>
+                    </div>
+
+                </div>
+                <div>
+                    <input type="radio" id="no" name="reference" value="no">
+                    <label for="no">No</label><br><br>
+                </div>
+            </td>
+        </tr>
+        <td><label for="position">Which position would you like to apply for ?</label></td>
+        <td>
+            <select id="position" name="postion">
+                <option value="frontend">Frontend Developer</option>
+                <option value="backend">Backend Developer</option>
+                <option value="fullstack">Full Stack Developer</option>
+            </select>
+        </td>
+        <tr>
+            <td><label for="languages" multiple>Languages you are familiar with:</label></td>
+            <td>
+                <div class="language-container">
+                    <div>
+                        <input type="checkbox" id="html" name="languages" value="html">
+                        <label for="html">HTML</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="css" name="languages" value="css">
+                        <label for="css">CSS</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="javascript" name="languages" value="javascript">
+                        <label for="javascript">JavaScript</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="python" name="languages" value="python">
+                        <label for="python">Python</label><br><br>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="message">Any comments ? </label></td>
+            <td><textarea id="message" name="message" rows="4" cols="50"></textarea></td>
+        </tr>
+    </table>
+
+</body>
