@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Registration Form</title>
+    <style>
+        body {
+            font-family: Arial;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 95%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+
+        .section {
+            background-color: lightgray;
+            padding: 8px;
+            font-weight: bold;
+        }
+
+        .btn {
+            padding: 8px 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>Student Registration Form</h2>
+
+        <div class="section">Basic Information</div>
+        <br>
+
+        <table>
+            <tr>
+                <td>First Name</td>
+                <td>Middle Name</td>
+                <td>Last Name</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+            </tr>
+
+            <tr>
+                <td>Student Number</td>
+                <td>Year Level</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td>
+                    <select>
+                        <option>Select</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Degree Program</td>
+                <td>Email</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="email"></td>
+            </tr>
+
+            <tr>
+                <td>Phone Number</td>
+                <td>Network Provider</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td>
+                    <select>
+                        <option>Select</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">Birth Date</td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="date"></td>
+            </tr>
+
+            <tr>
+                <td colspan="2">Present Address</td>
+            </tr>
+            <tr>
+                <td colspan="2"><textarea rows="3"></textarea></td>
+            </tr>
+
+        </table>
+
+        <br>
+
+        <div class="section">Academic Background</div>
+        <br>
+
+        <table>
+
+            <tr>
+                <td>High School Name</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+            </tr>
+
+            <tr>
+                <td>Upload CV</td>
+            </tr>
+            <tr>
+                <td><input type="file"></td>
+            </tr>
+
+            <tr>
+                <td>Extra Curricular Participation</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox"> Student Council
+                    <input type="checkbox"> Club/Organization
+                    <input type="checkbox"> Varsity Player
+                </td>
+            </tr>
+
+        </table>
+
+        <br>
+
+        <div class="section">Other Details</div>
+        <br>
+
+        <table>
+
+            <tr>
+                <td>Family Monthly Income</td>
+            </tr>
+            <tr>
+                <td>
+                    <select>
+                        <option>Select</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Do You Have Scholarship?</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="radio" name="sch"> Yes
+                    <input type="radio" name="sch"> No
+                </td>
+            </tr>
+
+            <tr>
+                <td>Suggestions / Comments</td>
+            </tr>
+            <tr>
+                <td><textarea rows="4"></textarea></td>
+            </tr>
+
+        </table>
+
+        <br><br>
+
+        <center>
+            <button class="btn">Print Form</button>
+            <button class="btn">Submit</button>
+        </center>
+
+    </div>
+
+</body>
+
+</html>
