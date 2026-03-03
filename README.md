@@ -10,6 +10,8 @@ This repository contains small **web development mini projects** that I build wh
 ## 🧠 Technologies Used
 - HTML
 - CSS
+- Bootstrap
+- javascript
 - (More technologies will be added as I progress)
 
 ## 📘 Learning Resources
@@ -24,7 +26,8 @@ This repository contains small **web development mini projects** that I build wh
 
 ## 📈 Learning Progress
 - HTML & CSS ✅
-- JavaScript Basics ⏳
+- JavaScript Basics ✅
+- DOM ✅
 - Advanced JavaScript ⏳
 - Frameworks (React, etc.) ⏳
 
