@@ -1,0 +1,23 @@
+body {
+    text-align: center;
+    margin-top: 100px;
+    font-family: Arial;
+}
+
+.big {
+    font-size: 10rem;
+}
+
+.red {
+    color: red;
+}
+
+.italic {
+    font-style: italic;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+}
