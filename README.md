@@ -23,7 +23,7 @@ This repository contains small **web development mini projects** that I build wh
 | 3 | Drum Kit | Interactive drum kit where different sounds play when keys are pressed | 🔗 [View](https://nithinsai-dev.github.io/web-dev/Minprojects/Drum-Kit/) |
 | 4 | Move It website | A small basic website with CSS and HTML | 🔗 [View](https://nithinsai-dev.github.io/web-dev/Minprojects/Move-It-website/) |
 | 5 | Text Style Toggler | A basic project to change the text in the website using buttons | 🔗 [View](https://nithinsai-dev.github.io/web-dev/Minprojects/text-style-toggler/) |
-| 6 | Indian flag | Creating Indian flag using CSS properties and HTML | 🔗[View](https://nithinsai-dev.github.io/web-dev/Minprojects/CSS-projects/indian-flag/) |
+| 6 | Indian flag | Creating Indian flag using CSS properties and HTML | 🔗 [View](https://nithinsai-dev.github.io/web-dev/Minprojects/CSS-projects/Indian-flag/) |
 
 
 ## 📘 Learning Resources
