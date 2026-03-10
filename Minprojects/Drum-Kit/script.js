@@ -5,12 +5,16 @@ for (var i = 0; i < document.querySelectorAll(".drum").length; i++) {
         var s = this.innerHTML;
 
         makeSound(s);
+
+        makeAnimation(s);
     });
 };
 
 //detecting keyboard press
 document.addEventListener("keypress", function (event) {
     makeSound(event.key);
+
+    makeAnimation(event.key);
 })
 
 function makeSound(key) {
@@ -57,5 +61,11 @@ function makeSound(key) {
     }
 }
 
+function makeAnimation(current) {
+    var activeButton = document.querySelector("." + current);
+    activeButton.classList.add("pressed");
 
-
+    setTimeout(function () {
+        activeButton.classList.remove("pressed");
+    }, 100);
+}
