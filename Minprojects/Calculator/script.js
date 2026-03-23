@@ -1,4 +1,3 @@
-
 const display = document.querySelector('#display');
 const buttons = document.querySelectorAll('button');
 
@@ -8,9 +7,15 @@ buttons.forEach(button => {
     button.addEventListener('click', () => {
         const value = button.innerText;
 
-        if (value === 'AC' || value === 'C') {
+        document.querySelectorAll('.op').forEach(b => b.classList.remove('active-op'));
+
+        if (value === 'AC') {
             currentInput = "";
-            display.value = "0";
+            display.value = "";
+        }
+        else if (value === 'DEL') {
+            currentInput = currentInput.slice(0, -1);
+            display.value = currentInput || "";
         }
         else if (value === '=') {
             try {
@@ -22,6 +27,9 @@ buttons.forEach(button => {
             }
         }
         else {
+            if (['+', '-', '*', '/'].includes(value)) {
+                button.classList.add('active-op');
+            }
             currentInput += value;
             display.value = currentInput;
         }
