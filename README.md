@@ -12,6 +12,9 @@ This repository contains small **web development mini projects** that I build wh
 - CSS
 - Bootstrap
 - javascript
+- NodeJS
+- expressJS
+- EJS
 - (More technologies will be added as I progress)
 
 ## 📂 Projects List
