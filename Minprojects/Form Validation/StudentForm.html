@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        input:required {
+            border-color: #3498db;
+        }
+
+        input:optional {
+            background-color: #f9f9f9;
+        }
+
+        input:valid {
+            border-color: #2ecc71;
+        }
+
+        input:invalid:not(:placeholder-shown) {
+            border-color: #e74c3c;
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            min-height: 18px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 20px;
+            border: 1px solid #c3e6cb;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Student Registration</h1>
+        <form id="registrationForm" novalidate>
+            <div class="form-group">
+                <label for="name">Name *</label>
+                <input type="text" id="name" name="name" required minlength="3" placeholder="Enter your name">
+                <div class="error-message" id="nameError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
+                <div class="error-message" id="emailError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age *</label>
+                <input type="number" id="age" name="age" required min="18" max="25" placeholder="Enter your age">
+                <div class="error-message" id="ageError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}"
+                    placeholder="Enter 10 digit phone number">
+                <div class="error-message" id="phoneError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password *</label>
+                <input type="password" id="password" name="password" required minlength="6"
+                    placeholder="Enter password (min 6 characters)">
+                <div class="error-message" id="passwordError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password *</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required
+                    placeholder="Re-enter your password">
+                <div class="error-message" id="confirmPasswordError"></div>
+            </div>
+
+            <button type="submit">Submit</button>
+
+            <div class="success-message" id="successMessage">
+                Form Submitted Successfully!
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('registrationForm');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const ageInput = document.getElementById('age');
+        const phoneInput = document.getElementById('phone');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+
+        // Real-time validation for all fields
+        nameInput.addEventListener('input', validateName);
+        emailInput.addEventListener('input', validateEmail);
+        ageInput.addEventListener('input', validateAge);
+        phoneInput.addEventListener('input', validatePhone);
+        passwordInput.addEventListener('input', validatePassword);
+        confirmPasswordInput.addEventListener('input', validateConfirmPassword);
+
+        function validateName() {
+            const nameError = document.getElementById('nameError');
+
+            if (nameInput.validity.valueMissing) {
+                nameInput.setCustomValidity('This field is required');
+                nameError.textContent = nameInput.validationMessage;
+                return false;
+            } else if (nameInput.validity.tooShort) {
+                nameInput.setCustomValidity('Name must be at least 3 characters');
+                nameError.textContent = 'Name must be at least 3 characters';
+                return false;
+            } else {
+                nameInput.setCustomValidity('');
+                nameError.textContent = '';
+                return true;
+            }
+        }
+
+        function validateEmail() {
+            const emailError = document.getElementById('emailError');
+
+            if (emailInput.validity.valueMissing) {
+                emailInput.setCustomValidity('This field is required');
+                emailError.textContent = emailInput.validationMessage;
+                return false;
+            } else if (emailInput.validity.typeMismatch) {
+                emailInput.setCustomValidity('Please enter a valid email address');
+                emailError.textContent = 'Please enter a valid email address';
+                return false;
+            } else {
+                emailInput.setCustomValidity('');
+                emailError.textContent = '';
+                return true;
+            }
+        }
+
+        function validateAge() {
+            const ageError = document.getElementById('ageError');
+
+            if (ageInput.validity.valueMissing) {
+                ageInput.setCustomValidity('This field is required');
+                ageError.textContent = ageInput.validationMessage;
+                return false;
+            } else if (ageInput.validity.rangeUnderflow) {
+                ageInput.setCustomValidity('Age must be at least 18');
+                ageError.textContent = 'Age must be at least 18';
+                return false;
+            } else if (ageInput.validity.rangeOverflow) {
+                ageInput.setCustomValidity('Age must not exceed 25');
+                ageError.textContent = 'Age must not exceed 25';
+                return false;
+            } else {
+                ageInput.setCustomValidity('');
+                ageError.textContent = '';
+                return true;
+            }
+        }
+
+        function validatePhone() {
+            const phoneError = document.getElementById('phoneError');
+
+            if (phoneInput.validity.valueMissing) {
+                phoneInput.setCustomValidity('This field is required');
+                phoneError.textContent = phoneInput.validationMessage;
+                return false;
+            } else if (phoneInput.validity.patternMismatch) {
+                phoneInput.setCustomValidity('Phone number must be exactly 10 digits');
+                phoneError.textContent = 'Phone number must be exactly 10 digits';
+                return false;
+            } else {
+                phoneInput.setCustomValidity('');
+                phoneError.textContent = '';
+                return true;
+            }
+        }
+
+        function validatePassword() {
+            const passwordError = document.getElementById('passwordError');
+
+            if (passwordInput.validity.valueMissing) {
+                passwordInput.setCustomValidity('This field is required');
+                passwordError.textContent = passwordInput.validationMessage;
+                return false;
+            } else if (passwordInput.validity.tooShort) {
+                passwordInput.setCustomValidity('Password must be at least 6 characters');
+                passwordError.textContent = 'Password must be at least 6 characters';
+                return false;
+            } else {
+                passwordInput.setCustomValidity('');
+                passwordError.textContent = '';
+                validateConfirmPassword(); // Re-validate confirm password when password changes
+                return true;
+            }
+        }
+
+        function validateConfirmPassword() {
+            const confirmPasswordError = document.getElementById('confirmPasswordError');
+
+            if (confirmPasswordInput.validity.valueMissing) {
+                confirmPasswordInput.setCustomValidity('This field is required');
+                confirmPasswordError.textContent = confirmPasswordInput.validationMessage;
+                return false;
+            } else if (confirmPasswordInput.value !== passwordInput.value) {
+                confirmPasswordInput.setCustomValidity('Passwords do not match');
+                confirmPasswordError.textContent = 'Passwords do not match';
+                return false;
+            } else {
+                confirmPasswordInput.setCustomValidity('');
+                confirmPasswordError.textContent = '';
+                return true;
+            }
+        }
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Validate all fields
+            const isNameValid = validateName();
+            const isEmailValid = validateEmail();
+            const isAgeValid = validateAge();
+            const isPhoneValid = validatePhone();
+            const isPasswordValid = validatePassword();
+            const isConfirmPasswordValid = validateConfirmPassword();
+
+            // Check overall form validity using checkValidity()
+            if (form.checkValidity() && isNameValid && isEmailValid && isAgeValid &&
+                isPhoneValid && isPasswordValid && isConfirmPasswordValid) {
+
+                // Display success message
+                document.getElementById('successMessage').style.display = 'block';
+
+                // Optional: Reset form after successful submission
+                setTimeout(() => {
+                    form.reset();
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 3000);
+            } else {
+                // Trigger validation messages
+                form.reportValidity();
+            }
+        });
+    </script>
+</body>
+
+</html>
