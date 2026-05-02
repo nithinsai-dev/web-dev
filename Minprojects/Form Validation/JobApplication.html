@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Job Application form</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Validation Colors */
+        input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        input:not(:placeholder-shown):valid {
+            border-color: rgb(100, 222, 100);
+        }
+
+        input:not(:placeholder-shown):invalid {
+            border-color: rgb(255, 49, 49);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            min-height: 18px;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        #success-msg {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 20px;
+            border: 1px solid #c3e6cb;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form id="registrationForm" method="POST">
+        <h2>Job Application</h2>
+
+        <div class="form-group">
+            <label>Name* : </label>
+            <input type="text" id="name" name="name" required placeholder="Enter your name" pattern="[A-Za-z\s]+" />
+            <div class="error-message" id="nameError"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Email* : </label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email" />
+            <div class="error-message" id="emailError"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Mobile Number* : </label>
+            <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" placeholder="10-digit number" />
+            <div class="error-message" id="numberError"></div>
+        </div>
+
+        <div class="form-group">
+            <label>DOB* : </label>
+            <input type="date" id="age" name="age" required />
+            <div class="error-message" id="ageError"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Experience (Years)* : </label>
+            <input type="number" id="exp" name="exp" required min="1" placeholder="Enter years of experience" />
+            <div class="error-message" id="expError"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Expected Salary* : </label>
+            <input type="number" id="salary" name="salary" required min="20000" max="100000"
+                placeholder="20,000 - 100,000" />
+            <div class="error-message" id="salaryError"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Skills*:</label>
+            <input type="checkbox" name="skills" value="HTML" class="skill-check"> HTML
+            <input type="checkbox" name="skills" value="CSS" class="skill-check"> CSS
+            <input type="checkbox" name="skills" value="JS" class="skill-check"> JavaScript
+            <div class="error-message" id="skillError"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Resume (PDF only)*:</label>
+            <input type="file" id="resume" name="resume" accept=".pdf" required>
+            <div class="error-message" id="resumeError"></div>
+        </div>
+
+        <div class="form-group">
+            <label>LinkedIn URL*:</label>
+            <input type="url" id="linkedin" name="linkedin" required placeholder="https://linkedin.com/in/..." />
+            <div class="error-message" id="linkError"></div>
+        </div>
+
+        <button type="submit">Submit Application</button>
+        <p id="success-msg">Form Submitted successfully</p>
+    </form>
+
+    <script>
+        const form = document.getElementById('registrationForm');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const ageInput = document.getElementById('age');
+        const phoneInput = document.getElementById('phone');
+        const expInput = document.getElementById('exp');
+        const salaryInput = document.getElementById('salary');
+        const resumeInput = document.getElementById('resume');
+        const linkInput = document.getElementById('linkedin');
+        const skillChecks = document.querySelectorAll('.skill-check');
+
+        // Event Listeners
+        nameInput.addEventListener('input', validateName);
+        emailInput.addEventListener('input', validateEmail);
+        ageInput.addEventListener('change', validateAge);
+        phoneInput.addEventListener('input', validatePhone);
+        expInput.addEventListener('input', validateExp);
+        salaryInput.addEventListener('input', validateSalary);
+        resumeInput.addEventListener('change', validateResume);
+        linkInput.addEventListener('input', validateLink);
+        skillChecks.forEach(check => check.addEventListener('change', validateSkills));
+
+        function validateName() {
+            const err = document.getElementById('nameError');
+            if (!nameInput.checkValidity()) {
+                err.textContent = "Name must contain only letters";
+                return false;
+            }
+            err.textContent = ""; return true;
+        }
+
+        function validateEmail() {
+            const err = document.getElementById('emailError');
+            if (!emailInput.checkValidity()) {
+                err.textContent = "Invalid email format";
+                return false;
+            }
+            err.textContent = ""; return true;
+        }
+
+        function validatePhone() {
+            const err = document.getElementById('numberError');
+            if (!phoneInput.checkValidity()) {
+                err.textContent = "Enter a valid 10-digit mobile number";
+                return false;
+            }
+            err.textContent = ""; return true;
+        }
+
+        function validateAge() {
+            const err = document.getElementById('ageError');
+            const birthDate = new Date(ageInput.value);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
+
+            if (age < 21 || age > 60 || isNaN(age)) {
+                err.textContent = "Age must be between 21 and 60";
+                return false;
+            }
+            err.textContent = ""; return true;
+        }
+
+        function validateExp() {
+            const err = document.getElementById('expError');
+            if (expInput.value < 1) {
+                err.textContent = "Experience must be at least 1 year";
+                return false;
+            }
+            err.textContent = ""; return true;
+        }
+
+        function validateSalary() {
+            const err = document.getElementById('salaryError');
+            if (!salaryInput.checkValidity()) {
+                err.textContent = "Salary must be between 20,000 and 100,000";
+                return false;
+            }
+            err.textContent = ""; return true;
+        }
+
+        function validateSkills() {
+            const err = document.getElementById('skillError');
+            const checked = document.querySelectorAll('.skill-check:checked').length;
+            if (checked === 0) {
+                err.textContent = "Select at least one skill";
+                return false;
+            }
+            err.textContent = ""; return true;
+        }
+
+        function validateResume() {
+            const err = document.getElementById('resumeError');
+            if (!resumeInput.value.toLowerCase().endsWith('.pdf')) {
+                err.textContent = "Only PDF files are allowed";
+                resumeInput.value = ""; // clear
+                return false;
+            }
+            err.textContent = ""; return true;
+        }
+
+        function validateLink() {
+            const err = document.getElementById('linkError');
+            if (!linkInput.checkValidity()) {
+                err.textContent = "Please enter a valid LinkedIn URL";
+                return false;
+            }
+            err.textContent = ""; return true;
+        }
+
+        form.addEventListener('submit', (e) => {
+            const isValid = validateName() && validateEmail() && validatePhone() &&
+                validateAge() && validateExp() && validateSalary() &&
+                validateSkills() && validateResume() && validateLink();
+
+            if (!isValid) {
+                e.preventDefault();
+                alert("Please fix errors before submitting.");
+            } else {
+                document.getElementById('success-msg').style.display = 'block';
+
+                setTimeout(() => {
+                    form.reset();
+                    document.getElementById('success-msg').style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+
+</html>
