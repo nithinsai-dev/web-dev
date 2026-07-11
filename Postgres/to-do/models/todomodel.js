@@ -15,14 +15,14 @@ export const getTodoById = async (id) => {
 
 export const createTodo = async (title, description) => {
     const result = await pool.query(
-        "INSERT INTO todos(title,description) VALUES($1,$2) RETURNING *"
+        "INSERT INTO todos(title,description) VALUES($1,$2) RETURNING *",
         [title, description]
     );
     return result.rows[0];
 };
 
 export const updateTodo = async (id, title, description, is_completed) => {
-    const result = pool.query("UPDATE todo SET title=$1 , description=$2, is_completed=$3 WHERE id=$4 RETURNING *",
+    const result = await pool.query("UPDATE todos SET title=$1 , description=$2, is_completed=$3 WHERE id=$4 RETURNING *",
         [title, description, is_completed, id]
     );
     return result.rows[0];
