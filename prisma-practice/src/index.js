@@ -79,3 +79,11 @@ async function main(){
 main()
     .catch(console.error)
     .finally(()=>prisma.$disconnect);
+
+
+//prisma.user.findUnique({
+//   where: { id: 1 },
+//   include: {
+//     tasks: true
+//   }
+// });
