@@ -1,6 +1,8 @@
-const TaskItem = ({ task, onToggle, onDelete }) => {
+function TaskItem({ task, onToggle, onDelete }) {
+
   return (
     <div>
+
       <h3>
         {task.title}
       </h3>
@@ -13,19 +15,16 @@ const TaskItem = ({ task, onToggle, onDelete }) => {
         Status: {task.completed ? "Completed" : "Pending"}
       </p>
 
-      <button
-        onClick={() => onToggle(task.id, !task.completed)}
-      >
-        {task.completed ? "Undo" : "Complete"}
+      <button onClick={() => onToggle(task)}>
+        Toggle
       </button>
 
-      <button
-        onClick={() => onDelete(task.id)}
-      >
+      <button onClick={() => onDelete(task.id)}>
         Delete
       </button>
+
     </div>
   );
-};
+}
 
 export default TaskItem;

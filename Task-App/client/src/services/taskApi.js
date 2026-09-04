@@ -1,5 +1,6 @@
 const API_URL = "http://localhost:5000/api/tasks";
 
+
 export const getTasks = async () => {
   const response = await fetch(API_URL);
 
@@ -10,13 +11,16 @@ export const getTasks = async () => {
   return response.json();
 };
 
+
 export const createTask = async (task) => {
   const response = await fetch(API_URL, {
     method: "POST",
+
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
-    body: JSON.stringify(task),
+
+    body: JSON.stringify(task)
   });
 
   if (!response.ok) {
@@ -26,13 +30,16 @@ export const createTask = async (task) => {
   return response.json();
 };
 
-export const updateTask = async (id, completed) => {
+
+export const updateTask = async (id, data) => {
   const response = await fetch(`${API_URL}/${id}`, {
     method: "PATCH",
+
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
-    body: JSON.stringify({ completed }),
+
+    body: JSON.stringify(data)
   });
 
   if (!response.ok) {
@@ -42,14 +49,13 @@ export const updateTask = async (id, completed) => {
   return response.json();
 };
 
+
 export const deleteTask = async (id) => {
   const response = await fetch(`${API_URL}/${id}`, {
-    method: "DELETE",
+    method: "DELETE"
   });
 
   if (!response.ok) {
     throw new Error("Failed to delete task");
-  }
-
-  return response.json();
+  };
 };
