@@ -1,9 +1,11 @@
 import {
   getAllTasks,
+  getTaskById,
   createTask,
   updateTask,
-  deleteTask,
-} from "../models/taskModel.js";
+  deleteTask
+} from "../services/taskService.js";
+
 
 export const getTasks = async (req, res, next) => {
   try {
@@ -15,28 +17,16 @@ export const getTasks = async (req, res, next) => {
   }
 };
 
-export const addTask = async (req, res, next) => {
+
+export const getTask = async (req, res, next) => {
   try {
-    const { title, description } = req.body;
+    const taskId = Number(req.params.id);
 
-    const task = await createTask(title, description);
-
-    res.status(201).json(task);
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const toggleTask = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const { completed } = req.body;
-
-    const task = await updateTask(id, completed);
+    const task = await getTaskById(taskId);
 
     if (!task) {
       return res.status(404).json({
-        message: "Task not found",
+        message: "Task not found"
       });
     }
 
@@ -46,22 +36,38 @@ export const toggleTask = async (req, res, next) => {
   }
 };
 
+
+export const addTask = async (req, res, next) => {
+  try {
+    const task = await createTask(req.body);
+
+    res.status(201).json(task);
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+export const editTask = async (req, res, next) => {
+  try {
+    const taskId = Number(req.params.id);
+
+    const task = await updateTask(taskId, req.body);
+
+    res.status(200).json(task);
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 export const removeTask = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const taskId = Number(req.params.id);
 
-    const task = await deleteTask(id);
+    await deleteTask(taskId);
 
-    if (!task) {
-      return res.status(404).json({
-        message: "Task not found",
-      });
-    }
-
-    res.status(200).json({
-      message: "Task deleted",
-      task,
-    });
+    res.status(204).send();
   } catch (error) {
     next(error);
   }

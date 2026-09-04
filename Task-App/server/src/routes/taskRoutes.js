@@ -2,26 +2,43 @@ import express from "express";
 
 import {
   getTasks,
+  getTask,
   addTask,
-  toggleTask,
-  removeTask,
+  editTask,
+  removeTask
 } from "../controllers/taskController.js";
 
 import { validate } from "../middleware/validate.js";
 
 import {
   createTaskSchema,
-  updateTaskSchema,
+  updateTaskSchema
 } from "../schemas/taskSchema.js";
+
 
 const router = express.Router();
 
+
 router.get("/", getTasks);
 
-router.post("/", validate(createTaskSchema), addTask);
+router.get("/:id", getTask);
 
-router.patch("/:id", validate(updateTaskSchema), toggleTask);
+router.post(
+  "/",
+  validate(createTaskSchema),
+  addTask
+);
 
-router.delete("/:id", removeTask);
+router.patch(
+  "/:id",
+  validate(updateTaskSchema),
+  editTask
+);
+
+router.delete(
+  "/:id",
+  removeTask
+);
+
 
 export default router;
